@@ -29,6 +29,7 @@ pipeline {
       agent {
         docker {
           image "${REPO}:${COMMIT}"
+          args "-u 1100:1100"
         }
       }
       steps {
