@@ -9,6 +9,7 @@ pipeline {
       steps {
         script {
          COMMIT = "${GIT_COMMIT.substring(0,8)}"
+         TAG = 'latest'
         }
         sh 'printenv | sort'
       }
@@ -16,6 +17,12 @@ pipeline {
     stage ('Docker Build') {
       steps {
         sh "docker build -f Dockerfile -t ${REPO}:${COMMIT} ./"
+      }
+      post {
+        success {
+          println "tag image"
+          sh "docker image tag ${REPO}:${COMMIT} ${PRIVATE_REPO}:${TAG}"
+        }
       }
     }
     stage ('Software Build') {
@@ -25,7 +32,12 @@ pipeline {
         }
       }
       steps {
-        sh '/bin/ls -la /opt'
+        sh 'cat /etc/redhat-release'
+        sh 'env | sort'
+        sh 'pwd'
+        sh 'cat /etc/passwd'
+        sh 'who'
+        sh 'whoami'
       }
     }
   }

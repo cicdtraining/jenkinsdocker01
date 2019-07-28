@@ -1,5 +1,12 @@
 FROM centos:centos6.10
 
-RUN mkdir -p /opt/testing
+SHELL ["/bin/bash", "-x", "-c"]
+
+RUN cat /etc/redhat-release ; \
+        env | sort ; \
+        pwd ; \
+        cat /etc/passwd ; \
+        who ; \
+        whoami ; \
 
 CMD ["/bin/bash"]
