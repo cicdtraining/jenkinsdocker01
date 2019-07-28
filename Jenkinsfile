@@ -7,9 +7,9 @@ pipeline {
   stages {
     stage ('Env Dump') {
       steps {
-        script {
-          COMMIT = "$GIT_COMMIT.substring(0,8)"
-        }
+        // script {
+        //   COMMIT = "$GIT_COMMIT.substring(0,8)"
+        // }
         // test
         sh 'printenv | sort'
         sh 'printenv | sort > /tmp/yes'
