@@ -15,10 +15,14 @@ pipeline {
       }
     }
     stage ('Docker Build') {
-      sh "docker build -f Dockerfile -t ${REPO}:${COMMIT} ./"
+      steps {
+        sh "docker build -f Dockerfile -t ${REPO}:${COMMIT} ./"
+      }
     }
     stage ('Software Build') {
-      sh '/bin/ls -la /opt'
+      steps {
+        sh '/bin/ls -la /opt'
+      }
     }
   }
 }
