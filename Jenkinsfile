@@ -47,7 +47,6 @@ pipeline {
         // sh 'id || echo OUCH'
         // sh 'touch /tmp/fromjenkins || echo OUCH'
         // sh '/bin/ls -la /tmp/fromjenkins || echo OUCH'
-        sh
       }
     }
   }
