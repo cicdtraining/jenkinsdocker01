@@ -7,12 +7,10 @@ pipeline {
   stages {
     stage ('Env Dump') {
       steps {
-        // script {
-        //   COMMIT = "$GIT_COMMIT.substring(0,8)"
-        // }
-        // test
+        script {
+         COMMIT = "${GIT_COMMIT.substring(0,8)}"
+        }
         sh 'printenv | sort'
-        sh 'printenv | sort > /tmp/yes'
       }
     }
     stage ('Docker Build') {
