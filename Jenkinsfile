@@ -10,6 +10,7 @@ pipeline {
         script {
           COMMIT = "$GIT_COMMIT.substring(0,8)"
         }
+        // test
         sh 'printenv | sort'
       }
     }
