@@ -32,12 +32,12 @@ pipeline {
         }
       }
       steps {
-        sh 'cat /etc/redhat-release'
-        sh 'env | sort'
-        sh 'pwd'
-        sh 'cat /etc/passwd'
-        sh 'who'
-        sh 'whoami'
+        sh 'cat /etc/redhat-release || echo OUCH'
+        sh 'env | sort || echo OUCH '
+        sh 'pwd || echo OUCH'
+        sh 'cat /etc/passwd || echo OUCH'
+        sh 'who || echo OUCH'
+        sh 'whoami || echo OUCH'
       }
     }
   }
