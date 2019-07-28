@@ -10,7 +10,7 @@ RUN echo "out id" && ( id || echo OUCH )
 
 RUN echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@ CHANGE USER @@@@@@@@@@@@@@@@@@@@@@@@@@@"
 RUN groupadd -g 1100 buildgrp ; \
-    useradd  -u 1100 -m -g buildusr ; \
+    useradd  -u 1100 -m -g buildgrp buildusr ; \
     yum install -y sudo ; \
     echo "buildusr ALL=(ALL) NOPASSWORD: ALL" >> /etc/sudoers
 WORKDIR /home/buildusr
