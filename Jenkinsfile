@@ -29,7 +29,6 @@ pipeline {
       agent {
         docker {
           image "${REPO}:${COMMIT}"
-          args "-u 1100:1100"
         }
       }
       steps {
@@ -38,6 +37,8 @@ pipeline {
         sh 'pwd || echo OUCH'
         sh 'whoami || echo OUCH'
         sh 'id || echo OUCH'
+        sh 'touch /tmp/fromjenkins || echo OUCH'
+        sh '/bin/ls -la /tmp/fromjenkins || echo OUCH'
       }
     }
   }

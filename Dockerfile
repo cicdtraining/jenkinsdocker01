@@ -7,6 +7,9 @@ RUN echo "out env" && ( env | sort || echo OUCH )
 RUN echo "out pwd" && ( pwd || echo OUCH )
 RUN echo "out whoami" && ( whoami || echo OUCH )
 RUN echo "out id" && ( id || echo OUCH )
+RUN echo "out touch" && ( touch /tmp/fromdocker-root || echo OUCH )
+RUN echo "out list" && ( /bin/ls -la /tmp/fromdocker-user || echo OUCH )
+RUN echo "out ls workspace" && ( /bin/ls -la /opt/tomcat/jenkins-master-b/jenkins-home/workspace/docker-as-user* || echo OUCH )
 
 RUN echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@ CHANGE USER @@@@@@@@@@@@@@@@@@@@@@@@@@@"
 RUN groupadd -g 1100 buildgrp ; \
@@ -19,5 +22,7 @@ USER buildusr
 RUN echo "out pwd" && ( pwd || echo OUCH )
 RUN echo "out whoami" && ( whoami || echo OUCH )
 RUN echo "out id" && ( id || echo OUCH )
+RUN echo "out touch" && ( touch /tmp/fromdocker-buildusr || echo OUCH )
+RUN echo "out list" && ( /bin/ls -la /tmp/fromdocker-buildusr || echo OUCH )
 
 CMD ["/bin/bash"]
