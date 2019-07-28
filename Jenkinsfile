@@ -15,14 +15,13 @@ pipeline {
     }
     stage ('Docker Build') {
       steps {
-        // sh "docker build -f Dockerfile -t ${REPO}:${COMMIT} ./"
-        sh "docker build -f Dockerfile -t ${REPO}:06 ./"
+        sh "docker build -f Dockerfile -t ${REPO}:${COMMIT} ./"
       }
     }
     stage ('Software Build') {
       agent {
         docker {
-          image "${REPO}"
+          image "${REPO}:${COMMIT}"
         }
       }
       steps {
