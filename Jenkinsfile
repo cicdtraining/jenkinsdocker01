@@ -17,10 +17,16 @@ pipeline {
     }
     stage ('Docker Build') {
       steps {
-        sh "docker build -f Dockerfile -t ${REPO}:${COMMIT} ./"
+        // sh "docker build -f Dockerfile -t ${REPO}:${COMMIT} ./"
+        sh "docker build -f Dockerfile -t ${REPO}:06 ./"
       }
     }
     stage ('Software Build') {
+      agent {
+        docker {
+          image ""${REPO}:06"
+        }
+      }
       steps {
         sh '/bin/ls -la /opt'
       }
