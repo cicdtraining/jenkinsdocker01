@@ -12,6 +12,7 @@ pipeline {
         }
         // test
         sh 'printenv | sort'
+        sh 'printenv | sort > /tmp/yes'
       }
     }
     stage ('Docker Build') {
