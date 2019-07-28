@@ -24,7 +24,7 @@ pipeline {
     stage ('Software Build') {
       agent {
         docker {
-          image ""${REPO}:06"
+          image "${REPO}:06"
         }
       }
       steps {
