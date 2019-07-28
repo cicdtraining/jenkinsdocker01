@@ -8,6 +8,7 @@ pipeline {
     stage ('Env Dump') {
       steps {
         script {
+
          COMMIT = "${GIT_COMMIT.substring(0,8)}"
          TAG = 'latest'
         }
@@ -25,20 +26,28 @@ pipeline {
         }
       }
     }
-    stage ('Software Build') {
-      agent {
-        docker {
-          image "${REPO}:${COMMIT}"
-        }
-      }
+    stage ('Docker Run') {
       steps {
-        sh 'cat /etc/redhat-release || echo OUCH'
-        sh 'env | sort || echo OUCH '
-        sh 'pwd || echo OUCH'
-        sh 'whoami || echo OUCH'
-        sh 'id || echo OUCH'
-        sh 'touch /tmp/fromjenkins || echo OUCH'
-        sh '/bin/ls -la /tmp/fromjenkins || echo OUCH'
+        sh "docker run -d --name 'jenkins-${BUILD_NUMBER}' ${REPO}:${COMMIT}"
+      }
+    }
+    stage ('Software Build') {
+      // agent {
+      //   docker {
+      //     image "${REPO}:${COMMIT}"
+      //   }
+      // }
+      steps {
+        sh "docker exec jenkins-${BUILD_NUMBER} /bin/bash -c 'touch /tmp/fromjenkins'"
+        sh "docker exec jenkins-${BUILD_NUMBER} /bin/bash -c '/bin/ls -la /tmp/fromjenkins'"
+        // sh 'cat /etc/redhat-release || echo OUCH'
+        // sh 'env | sort || echo OUCH '
+        // sh 'pwd || echo OUCH'
+        // sh 'whoami || echo OUCH'
+        // sh 'id || echo OUCH'
+        // sh 'touch /tmp/fromjenkins || echo OUCH'
+        // sh '/bin/ls -la /tmp/fromjenkins || echo OUCH'
+        sh
       }
     }
   }
