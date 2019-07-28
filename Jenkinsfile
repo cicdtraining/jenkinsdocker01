@@ -16,7 +16,7 @@ pipeline {
     }
     stage ('Docker Build') {
       steps {
-        sh "docker build -f Dockerfile -t ${REPO}:${COMMIT} ./"
+        sh "docker build --no-cache -f Dockerfile -t ${REPO}:${COMMIT} ./"
       }
       post {
         success {
